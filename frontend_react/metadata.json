@@ -1,0 +1,5 @@
+{
+  "name": "Hybrid Sentiment Analysis Dashboard",
+  "description": "A modern, professional SaaS dashboard UI for a Hybrid Sentiment Analysis System to monitor customer feedback across multiple channels. It features a data-driven, minimalistic style inspired by tools like Grafana and Datadog.",
+  "requestFramePermissions": []
+}
