@@ -1,0 +1,4 @@
+$ cd /workspace/dashboard
+$ cp /workspace/uploads/*.png public/assets/
+
+cp: target 'public/assets/' is not a directory

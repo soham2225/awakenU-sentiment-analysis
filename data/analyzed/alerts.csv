@@ -1,0 +1,83 @@
+alert_type,email_id,platform,sender,product,sentiment,confidence,urgency,feedback_type,action,details,timestamp
+strong_negative,d1a4d7882819,email,Samruddhi Gangurde <samruddhigangurde0708@gmail.com>,unknown,negative,0.999594748020172,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,14cd62172ff5,email,Zingoy <noreply@zingoy.com>,unknown,negative,0.8491793274879456,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,b4c869700d89,email,Alison Learning <noreply@us-learning.alison.com>,unknown,negative,0.8674865365028381,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,908d79e49001,email,LinkedIn <updates-noreply@linkedin.com>,unknown,negative,0.9451147317886353,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,a7d6a7fc248f,email,Job Opening | Cuvette <team@cuvette.tech>,unknown,negative,0.9363599419593812,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,5988a6f921f1,email,notification@jio.com,unknown,negative,0.9687808156013488,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,cc23ac5b8050,email,"""TVS Credit E.P.I.C"" <noreply@dare2compete.news>",unknown,negative,0.945709228515625,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,852b6990448b,email,YONO SBI <yonosbi@alerts.sbi.co.in>,unknown,negative,0.9984316229820251,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,bdb36a3c38d8,email,YONO SBI <YONOSBI@communications.sbi.co.in>,unknown,negative,0.998645007610321,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,ff112c75dc37,email,"""=?utf-8?q?Pinterest?="" <pinterest-recommendations@ideas.pinterest.com>",unknown,negative,0.9913698434829712,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,5171f0041974,email,=?UTF-8?B?U3dpZ2d5?= <no-reply@swiggy.in>,unknown,negative,0.9481944441795348,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,9bfafa47b0b9,email,Groww Trading Bulletin <noreply@groww.in>,unknown,negative,0.9941830039024352,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,b26c3482402d,email,"""Coursera"" <Coursera@m.learn.coursera.org>",unknown,negative,0.9885894060134888,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,93e5cca590d6,email,deloittesh-jobnotification@noreply44.jobs2web.com,unknown,negative,0.991139590740204,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,c2b9122acb31,email,Internshala Jobs <student@mail.internshala.com>,unknown,negative,0.9969422221183776,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,32d31334f44d,email,Alison <noreply@us-skills.alison.com>,unknown,negative,0.999051034450531,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,2a692b21cfeb,email,"""Facebook"" <notification@priority.facebookmail.com>",unknown,negative,0.9873812198638916,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,3bdbd944bafc,email,Job Guarantee Course | Cuvette Tech <team@cuvette.tech>,unknown,negative,0.9877395033836364,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,65e1f7eab2bc,email,=?UTF-8?B?TGlua2VkSW4=?= <linkedin@e.linkedin.com>,unknown,negative,0.9942293167114258,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,05b62a891022,email,Generative AI via LinkedIn <newsletters-noreply@linkedin.com>,unknown,negative,0.9944234490394592,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,658096e81199,email,Alison <noreply@us-skills.alison.com>,unknown,negative,0.9986067414283752,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,639708dd7763,email,Groww Trading Bulletin <noreply@groww.in>,unknown,negative,0.9934537410736084,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,f7529e30675d,email,Qubo by Hero Group <hello@mail.quboworld.com>,unknown,negative,0.999106466770172,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,a41c592c76e7,email,=?UTF-8?B?U3dpZ2d5?= <no-reply@swiggy.in>,unknown,negative,0.9481944441795348,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,106e633b9297,email,YONO SBI <yonosbi@alerts.sbi.co.in>,unknown,negative,0.9984316229820251,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,472c31cd1f93,email,=?UTF-8?B?U0JJ?= <sbi@communications.sbi.co.in>,unknown,negative,0.9927585124969482,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,d64c6432db7a,email,"""IMDb.com"" <do-not-reply@imdb.com>",unknown,negative,0.7594759464263916,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,6b6d989f0d5f,email,Alison <noreply@us-skills.alison.com>,unknown,negative,0.990970492362976,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,4699f1c68bb3,email,Generative AI via LinkedIn <newsletters-noreply@linkedin.com>,unknown,negative,0.7598583102226257,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,b3862ef2abac,email,Alison <noreply@us-education.alison.com>,unknown,negative,0.9974942207336426,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,24e4da7a6227,email,LinkedIn <updates-noreply@linkedin.com>,unknown,negative,0.9769396781921388,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,59b67c94fbec,email,"""Coursera"" <Coursera@m.learn.coursera.org>",unknown,negative,0.9966323971748352,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,48896bce2438,email,Internshala Trainings <trainings@updates.internshala.com>,unknown,negative,0.9989970326423644,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,f1c46f217262,email,Internshala Jobs <student@mail.internshala.com>,unknown,negative,0.9951156377792358,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,c2b44d922cec,email,Job Opening | Cuvette <team@cuvette.tech>,unknown,negative,0.8857467174530029,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,2cfbb77e8566,email,Uber <uber@uber.com>,unknown,negative,0.9983375072479248,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,d007347624ff,email,Saubhagya Peethambaran <saubhagyap77@gmail.com>,unknown,negative,0.9998095631599426,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,00fcf8fd3b73,email,Saubhagya Peethambaran <saubhagyap77@gmail.com>,unknown,negative,0.9995762705802916,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,250c0a0162fa,email,Saubhagya Peethambaran <saubhagyap77@gmail.com>,unknown,negative,0.9994524121284484,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,7f39066179ff,email,Google <no-reply@accounts.google.com>,unknown,negative,0.9945344924926758,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,6acce9220285,email,"""Adobe Acrobat"" <mail@mail.adobe.com>",unknown,negative,0.9983872175216676,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,225aa3929d80,email,Apple <News@InsideApple.Apple.com>,unknown,negative,0.9497755765914916,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,5d91318e61a0,email,Groww Trading Bulletin <noreply@groww.in>,unknown,negative,0.9975588321685792,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,cfa05f9edab1,email,Google <no-reply@accounts.google.com>,unknown,negative,0.9986230134963988,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,a0a172004e07,email,Google <no-reply@accounts.google.com>,unknown,negative,0.996227502822876,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,eabf388f3b2e,email,Google <noreply@google.com>,unknown,negative,0.999284565448761,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,6477ebd75ecf,email,Google <no-reply@accounts.google.com>,unknown,negative,0.997000515460968,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,69fae134d8b1,email,LinkedIn <messages-noreply@linkedin.com>,unknown,negative,0.8198592662811279,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,f2403a1786f4,email,Unacademy <team@info.unacademy.com>,unknown,negative,0.9957982897758484,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,3e6020c0c655,email,john.doe@example.com,unknown,negative,0.9992347955703736,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,1ec8e4241a98,email,mike.jones@example.com,unknown,negative,0.9946910738945008,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,4017745d3aa3,email,emma.wilson@example.com,unknown,negative,0.9996206760406494,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,afb96359e708,email,sophia.garcia@example.com,unknown,negative,0.9993628859519958,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,7b3a8ce73ac6,email,james.rodriguez@example.com,unknown,negative,0.999691128730774,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,2936a9359f3d,email,william.davis@example.com,unknown,negative,0.9993628859519958,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,a629998876a9,email,isabella.martinez@example.com,unknown,negative,0.992068886756897,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,1533514e0ca0,email,james.rodriguez@example.com,unknown,negative,0.9977814555168152,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,d5fc5cf678bd,email,sophia.garcia@example.com,unknown,negative,0.9945145845413208,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,f699a00bb31e,email,anna.smith@example.com,unknown,negative,0.9994388222694396,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,26c108d6a11a,email,anna.smith@example.com,unknown,negative,0.9993628859519958,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,3433541d094e,email,ava.miller@example.com,unknown,negative,0.992068886756897,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,ec03194eb22e,email,olivia.brown@example.com,unknown,negative,0.9995833039283752,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,ed22c3c63fd3,email,noah.james@example.com,unknown,negative,0.999691128730774,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,633022b9f069,email,olivia.brown@example.com,unknown,negative,0.999691128730774,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,aeeb7ff68f53,email,olivia.brown@example.com,unknown,negative,0.9977814555168152,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,fdea864216c9,email,sophia.garcia@example.com,unknown,negative,0.9977814555168152,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,34d214f5fc8e,email,sophia.garcia@example.com,unknown,negative,0.9995833039283752,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,524a2b4881cd,email,lucas.hernandez@example.com,unknown,negative,0.992068886756897,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,ec7fed65e106,email,lucas.hernandez@example.com,unknown,negative,0.9993628859519958,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,5d33e9e6de08,email,lucas.hernandez@example.com,unknown,negative,0.9995833039283752,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,771da18f0c55,email,isabella.martinez@example.com,unknown,negative,0.9995833039283752,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,0513eb738e54,email,noah.james@example.com,unknown,negative,0.9994388222694396,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,19e620975cbc,email,ava.miller@example.com,unknown,negative,0.9945145845413208,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,7fec08502bb5,email,liam.johnson@example.com,unknown,negative,0.992068886756897,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+strong_negative,4a7a50f97191,email,olivia.brown@example.com,unknown,negative,0.9993628859519958,medium,neutral,review,Negative sentiment with high confidence.,2025-08-03T12:50:37.685010
+high_urgency_complaint,,email,Generative AI via LinkedIn <newsletters-noreply@linkedin.com>,product_y,positive,0.9,high,complaint,escalate,"High urgency complaint, escalate immediately.",2025-08-28T13:08:29.970361
+high_urgency_complaint,,email,Generative AI via LinkedIn <newsletters-noreply@linkedin.com>,unknown,negative,0.994,high,complaint,escalate,"High urgency complaint, escalate immediately.",2025-08-28T13:08:29.970361
+high_urgency_complaint,,email,Groww Trading Bulletin <noreply@groww.in>,mobile_app,negative,0.993,high,complaint,escalate,"High urgency complaint, escalate immediately.",2025-08-28T13:08:29.970361
+strong_negative,,email,Samruddhi Gangurde <samruddhigangurde0708@gmail.com>,mobile_app,negative,1.0,medium,suggestion,log for roadmap,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361
+strong_negative,,email,Zingoy <noreply@zingoy.com>,product_y,negative,0.849,high,neutral,review,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361
+strong_negative,,email,Alison Learning <noreply@us-learning.alison.com>,unknown,negative,0.867,medium,neutral,review,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361
+strong_negative,,email,Job Guarantee Course | Cuvette Tech <team@cuvette.tech>,checkout,negative,0.988,high,neutral,review,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361

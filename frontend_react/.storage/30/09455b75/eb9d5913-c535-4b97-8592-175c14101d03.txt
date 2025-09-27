@@ -1,0 +1,46 @@
+$ cd /workspace/dashboard
+$ cp /workspace/uploads/*.png public/assets/
+
+cp: target 'public/assets/' is not a directory
+$ mkdir -p public/assets
+
+$ cp /workspace/uploads/*.png public/assets/
+
+$ pnpm i && pnpm run lint && pnpm run build
+
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: @metagptx/vite-plugin-source-locator, esbuild.      │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Done in 1.2s using pnpm v10.10.0
+
+> react-template@0.0.0 lint /workspace/dashboard
+> eslint ./src --quiet
+
+
+/workspace/dashboard/src/components/auth/LoginPage.jsx
+  41:82  error  Parsing error: Unexpected token 60
+
+✖ 1 problem (1 error, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.
+$ pnpm run lint && pnpm run build
+
+
+> react-template@0.0.0 lint /workspace/dashboard
+> eslint ./src --quiet
+
+
+/workspace/dashboard/src/components/auth/LoginPage.jsx
+  41:97  error  Parsing error: Unexpected token 60
+
+✖ 1 problem (1 error, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.

@@ -1,0 +1,8 @@
+$ cd /workspace/dashboard
+$ cp /workspace/uploads/*.png public/assets/
+
+cp: target 'public/assets/' is not a directory
+$ mkdir -p public/assets
+
+$ cp /workspace/uploads/*.png public/assets/
+

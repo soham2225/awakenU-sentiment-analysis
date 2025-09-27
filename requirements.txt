@@ -1,0 +1,24 @@
+nltk
+scikit-learn
+streamlit
+pandas
+numpy
+matplotlib
+transformers
+beautifulsoup4
+tweepy
+flair
+textblob
+google-auth
+google-auth-oauthlib
+google-api-python-client
+pandas
+transformers
+joblib
+scikit-learn
+seaborn
+matplotlib
+Flask
+Flask-Cors
+razorpay
+python-dotenv # If you choose to use .env files for local development
