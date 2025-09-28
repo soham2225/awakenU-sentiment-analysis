@@ -32,7 +32,8 @@ Here’s the difference between **local vs deployed** so you don’t get confuse
 * ✅ You **don’t need Render or Netlify** for local testing.
 
 ---
-
+## deployed at :
+ * https://awakenu-1.netlify.app/
 ### 🔹 Deployment
 
 * **Backend (Render)** → You only need to redeploy if:
