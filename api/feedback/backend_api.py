@@ -178,11 +178,11 @@ def get_alerts(
 
 # -------------------- Stripe Checkout --------------------
 @app.post("/api/checkout")
-async def create_checkout_session(request: Request):
+async def create_checkout_session(request: Request, body: dict = Body(...)):
     if not stripe.api_key:
         raise HTTPException(status_code=500, detail="Stripe is not configured")
+
     try:
-        body = await request.json()  # <-- await here
         plan = body.get("plan", "pro")
         amount_cents = body.get("amount_cents", 2999)
         currency = body.get("currency", "usd")

@@ -36,7 +36,8 @@ const PaymentGateway = ({ onClose, onSuccess }) => {
 
     try {
       // Call backend to create Stripe checkout session
-      const response = await fetch('/api/checkout', {
+      const response = await fetch('https://awakenu-sentiment-analysis.onrender.com/api/checkout', {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
