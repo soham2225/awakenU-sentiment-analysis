@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import stripe
 
-from fastapi import FastAPI, HTTPException, Request, Query ,body
+from fastapi import FastAPI, HTTPException, Request, Query ,Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse, StreamingResponse
