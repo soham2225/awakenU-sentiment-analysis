@@ -43,7 +43,7 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "")
 STRIPE_PRICE_ID = os.getenv("STRIPE_PRICE_ID", "")
 STRIPE_CURRENCY = os.getenv("STRIPE_CURRENCY", "usd")
 STRIPE_AMOUNT_CENTS = int(os.getenv("STRIPE_AMOUNT_CENTS", "499"))
-PUBLIC_DOMAIN = os.getenv("PUBLIC_DOMAIN", "http://127.0.0.1:8000")
+PUBLIC_DOMAIN = "https://awakenu-1.netlify.app/"
 
 # -------------------- Utility Functions --------------------
 def load_and_normalize_df(path: str) -> pd.DataFrame:
