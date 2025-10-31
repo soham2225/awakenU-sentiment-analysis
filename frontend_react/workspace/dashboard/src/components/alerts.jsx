@@ -13,20 +13,21 @@ const AlertsPage = () => {
 
   // 🔹 Fetch alerts from backend API
   useEffect(() => {
-    async function fetchAlerts() {
-      try {
-        const res = await fetch('http://localhost:8000/api/alerts');
-        const data = await res.json();
-        setAlerts(data);
-        setFilteredAlerts(data);
-      } catch (error) {
-        console.error('Error fetching alerts:', error);
-      } finally {
-        setLoading(false);
-      }
+  async function fetchAlerts() {
+    try {
+      const res = await fetch('https://awakenu-sentiment-analysis.onrender.com/api/alerts');
+      const data = await res.json();
+      setAlerts(data);
+      setFilteredAlerts(data);
+    } catch (error) {
+      console.error('Error fetching alerts:', error);
+    } finally {
+      setLoading(false);
     }
-    fetchAlerts();
-  }, []);
+  }
+  fetchAlerts();
+}, []);
+
 
   // 🔹 Filter alerts by urgency
   const handleFilter = (urgency) => {
