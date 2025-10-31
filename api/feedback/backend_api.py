@@ -179,42 +179,30 @@ def get_alerts(
 # -------------------- Stripe Checkout --------------------
 @app.post("/api/checkout")
 async def create_checkout_session(request: Request, body: dict = Body(...)):
-    if not stripe.api_key:
-        raise HTTPException(status_code=500, detail="Stripe is not configured")
-
     try:
         plan = body.get("plan", "pro")
-        amount_cents = body.get("amount_cents", 2999)
-        currency = body.get("currency", "usd")
+        amount_rupees = body.get("amount_rupees", 299)
+        amount_paise = int(amount_rupees * 100)  # Razorpay works in paise
 
         plan_configs = {
-            "basic": {"name": "Basic Export Plan", "description": "Export up to 1,000 records with basic analytics"},
-            "pro": {"name": "Pro Export Plan", "description": "Export up to 10,000 records with advanced analytics and custom filters"},
-            "enterprise": {"name": "Enterprise Export Plan", "description": "Unlimited exports with all formats, API access, and dedicated support"}
+            "basic": {"name": "Basic Export Plan", "description": "Export up to 1,000 records"},
+            "pro": {"name": "Pro Export Plan", "description": "Export up to 10,000 records"},
+            "enterprise": {"name": "Enterprise Plan", "description": "Unlimited exports"},
         }
 
         plan_config = plan_configs.get(plan, plan_configs["pro"])
-        success_url = f"{PUBLIC_DOMAIN}/#/export-success?session_id={{CHECKOUT_SESSION_ID}}&plan={plan}"
-        cancel_url = f"{PUBLIC_DOMAIN}/#/dashboard"
 
-        session = stripe.checkout.Session.create(
-            mode="payment",
-            line_items=[{
-                "price_data": {
-                    "currency": currency,
-                    "unit_amount": amount_cents,
-                    "product_data": {"name": plan_config["name"], "description": plan_config["description"]},
-                },
-                "quantity": 1,
-            }],
-            success_url=success_url,
-            cancel_url=cancel_url,
-            metadata={"plan": plan, "amount_cents": str(amount_cents), "currency": currency}
-        )
-        return {"url": session.url}
+        order = razorpay_client.order.create({
+            "amount": amount_paise,
+            "currency": "INR",
+            "payment_capture": 1,
+            "notes": {"plan": plan, "description": plan_config["description"]}
+        })
+
+        return {"order_id": order["id"], "amount": amount_paise, "currency": "INR"}
     except Exception as e:
-        logger.exception("Error creating checkout session")
         raise HTTPException(status_code=500, detail=str(e))
+
 
 
 @app.get("/api/export")

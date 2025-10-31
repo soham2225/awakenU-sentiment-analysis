@@ -31,42 +31,72 @@ const PaymentGateway = ({ onClose, onSuccess }) => {
   ];
 
   const handlePayment = async () => {
-    setProcessing(true);
-    setError('');
+  setProcessing(true);
+  setError('');
 
-    try {
-      // Call backend to create Stripe checkout session
-      const response = await fetch('https://awakenu-sentiment-analysis.onrender.com/api/checkout', {
+  try {
+    const selectedPlanData = plans.find(p => p.id === selectedPlan);
+    const amount = selectedPlanData?.amount_cents / 100; // Convert cents to dollars equivalent
 
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          plan: selectedPlan,
-          amount_cents: plans.find(p => p.id === selectedPlan)?.amount_cents,
-          currency: 'usd'
-        })
-      });
+    // 1️⃣ Call backend to create a Razorpay order
+    const response = await fetch('https://awakenu-sentiment-analysis.onrender.com/api/payment_gateway/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        amount: amount, // Razorpay takes amount in rupees, backend multiplies by 100
+        currency: 'INR',
+        selectedPlanId: selectedPlan
+      })
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to create checkout session');
-      }
+    const orderData = await response.json();
 
-      const data = await response.json();
-      
-      if (data.url) {
-        // Redirect to Stripe Checkout
-        window.location.href = data.url;
-      } else {
-        throw new Error('No checkout URL received');
-      }
-    } catch (err) {
-      setError(err.message);
-      setProcessing(false);
+    if (!response.ok || !orderData.id) {
+      throw new Error(orderData.message || 'Failed to create Razorpay order');
     }
-  };
+
+    // 2️⃣ Initialize Razorpay Checkout
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY_ID, // ✅ Your Razorpay key (Frontend key, not secret)
+      amount: orderData.amount,
+      currency: orderData.currency,
+      name: 'AwakenU Premium Export',
+      description: selectedPlanData.name,
+      order_id: orderData.id,
+      handler: async function (response) {
+        // Verify payment on backend
+        const verifyResponse = await fetch('https://awakenu-sentiment-analysis.onrender.com/api/payment_gateway/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            selectedPlanId: selectedPlan
+          })
+        });
+
+        const verifyData = await verifyResponse.json();
+        if (verifyData.status === 'success') {
+          onSuccess();
+        } else {
+          setError('Payment verification failed.');
+        }
+      },
+      theme: { color: '#3399cc' },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setProcessing(false);
+  }
+};
+
 
   const selectedPlanData = plans.find(p => p.id === selectedPlan);
   const totalAmount = selectedPlanData ? (selectedPlanData.amount_cents / 100) + 0.99 : 0;
