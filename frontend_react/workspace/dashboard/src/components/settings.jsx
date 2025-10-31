@@ -16,18 +16,19 @@ import {
   Check,
 } from 'lucide-react';
 
-type Theme = 'purple' | 'cyan' | 'pink';
-type RefreshInterval = '5s' | '10s' | '30s';
-type AlertSensitivity = 'low' | 'medium' | 'high';
+// Theme and setting options
+const Themes = ['purple', 'cyan', 'pink'];
+const RefreshIntervals = ['5s', '10s', '30s'];
+const AlertSensitivities = ['low', 'medium', 'high'];
 
 function Settings() {
   const [darkMode, setDarkMode] = useState(true);
   const [notifications, setNotifications] = useState(true);
   const [aiInsights, setAiInsights] = useState(true);
   const [autoBackup, setAutoBackup] = useState(false);
-  const [refreshInterval, setRefreshInterval] = useState<RefreshInterval>('10s');
-  const [alertSensitivity, setAlertSensitivity] = useState<AlertSensitivity>('medium');
-  const [selectedTheme, setSelectedTheme] = useState<Theme>('purple');
+  const [refreshInterval, setRefreshInterval] = useState('10s');
+  const [alertSensitivity, setAlertSensitivity] = useState('medium');
+  const [selectedTheme, setSelectedTheme] = useState('purple');
   const [language, setLanguage] = useState('en');
 
   const handleResetSettings = () => {
@@ -57,6 +58,7 @@ function Settings() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* User Profile & Preferences */}
           <div className="glass-card animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <div className="flex items-center gap-3 mb-6">
               <User className="w-6 h-6 text-[#00E7F9]" />
@@ -116,6 +118,7 @@ function Settings() {
             </div>
           </div>
 
+          {/* System Settings */}
           <div className="glass-card animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <div className="flex items-center gap-3 mb-6">
               <RefreshCw className="w-6 h-6 text-[#9D4EDD]" />
@@ -132,7 +135,7 @@ function Settings() {
                 </div>
                 <select
                   value={refreshInterval}
-                  onChange={(e) => setRefreshInterval(e.target.value as RefreshInterval)}
+                  onChange={(e) => setRefreshInterval(e.target.value)}
                   className="px-4 py-2 rounded-lg bg-white/5 border border-[#9D4EDD]/30 text-white focus:border-[#9D4EDD] focus:shadow-[0_0_15px_rgba(157,78,221,0.3)] outline-none transition-all duration-300"
                 >
                   <option value="5s">5 seconds</option>
@@ -150,7 +153,7 @@ function Settings() {
                 </div>
                 <select
                   value={alertSensitivity}
-                  onChange={(e) => setAlertSensitivity(e.target.value as AlertSensitivity)}
+                  onChange={(e) => setAlertSensitivity(e.target.value)}
                   className="px-4 py-2 rounded-lg bg-white/5 border border-[#00E7F9]/30 text-white focus:border-[#00E7F9] focus:shadow-[0_0_15px_rgba(0,231,249,0.3)] outline-none transition-all duration-300"
                 >
                   <option value="low">Low</option>
@@ -186,6 +189,7 @@ function Settings() {
             </div>
           </div>
 
+          {/* Privacy & Permissions */}
           <div className="glass-card animate-slide-up" style={{ animationDelay: '0.3s' }}>
             <div className="flex items-center gap-3 mb-6">
               <Lock className="w-6 h-6 text-[#00E7F9]" />
@@ -231,6 +235,7 @@ function Settings() {
             </div>
           </div>
 
+          {/* Theme Customization */}
           <div className="glass-card animate-slide-up" style={{ animationDelay: '0.4s' }}>
             <div className="flex items-center gap-3 mb-6">
               <Palette className="w-6 h-6 text-[#9D4EDD]" />
@@ -240,21 +245,14 @@ function Settings() {
             <div className="mb-6">
               <p className="text-[#CFCFEF] mb-4">Select Accent Color:</p>
               <div className="flex gap-4">
-                <ThemeButton
-                  color="purple"
-                  selected={selectedTheme === 'purple'}
-                  onClick={() => setSelectedTheme('purple')}
-                />
-                <ThemeButton
-                  color="cyan"
-                  selected={selectedTheme === 'cyan'}
-                  onClick={() => setSelectedTheme('cyan')}
-                />
-                <ThemeButton
-                  color="pink"
-                  selected={selectedTheme === 'pink'}
-                  onClick={() => setSelectedTheme('pink')}
-                />
+                {Themes.map((color) => (
+                  <ThemeButton
+                    key={color}
+                    color={color}
+                    selected={selectedTheme === color}
+                    onClick={() => setSelectedTheme(color)}
+                  />
+                ))}
               </div>
             </div>
 
@@ -287,15 +285,7 @@ function Settings() {
   );
 }
 
-interface SettingRowProps {
-  icon: React.ReactNode;
-  label: string;
-  toggle?: boolean;
-  onToggle?: () => void;
-  onClick?: () => void;
-}
-
-function SettingRow({ icon, label, toggle, onToggle, onClick }: SettingRowProps) {
+function SettingRow({ icon, label, toggle, onToggle, onClick }) {
   const content = (
     <>
       <div className="flex items-center gap-3">
@@ -317,12 +307,7 @@ function SettingRow({ icon, label, toggle, onToggle, onClick }: SettingRowProps)
   return <div className="setting-row group">{content}</div>;
 }
 
-interface ToggleProps {
-  checked: boolean;
-  onChange?: () => void;
-}
-
-function Toggle({ checked, onChange }: ToggleProps) {
+function Toggle({ checked, onChange }) {
   return (
     <button
       onClick={onChange}
@@ -339,13 +324,7 @@ function Toggle({ checked, onChange }: ToggleProps) {
   );
 }
 
-interface ThemeButtonProps {
-  color: Theme;
-  selected: boolean;
-  onClick: () => void;
-}
-
-function ThemeButton({ color, selected, onClick }: ThemeButtonProps) {
+function ThemeButton({ color, selected, onClick }) {
   const colors = {
     purple: 'from-[#9D4EDD] to-[#7B2CBF]',
     cyan: 'from-[#00E7F9] to-[#0091AD]',
