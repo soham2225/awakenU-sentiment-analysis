@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, AlertTriangle, MessageSquare, TrendingUp, Loader2 } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card } from './charts/card';
+import { Badge } from './charts/badge';
+
+
 
 const AlertsPage = () => {
   const [alerts, setAlerts] = useState([]);
