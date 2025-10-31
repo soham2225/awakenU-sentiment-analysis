@@ -12,7 +12,7 @@ export default function ProductReviewInsights() {
   useEffect(() => {
     async function fetchInsights() {
       try {
-        const res = await fetch("http://localhost:5000/api/reviews/insights"); // backend endpoint
+        const res = await fetch('https://awakenu-sentiment-analysis.onrender.com/api/alerts'); // backend endpoint
         const data = await res.json();
         setCustomerStories(data.customerStories || []);
         setProductsNeedingAttention(data.productsNeedingAttention || []);
