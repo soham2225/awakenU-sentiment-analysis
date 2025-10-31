@@ -6,7 +6,8 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import FeedbackExplorer from './components/FeedbackExplorer';
 import AlertsPage from './components/alerts';
-import ProductReviewInsights from './components/products'; // ✅ import real product component
+import ProductReviewInsights from './components/products'; 
+import SettingsPage from './components/settings'; // ✅ import real product component
 
 const AppContent = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -42,12 +43,7 @@ const AppContent = () => {
       case 'alerts':
         return <AlertsPage />;
       case 'settings':
-        return (
-          <div className="text-white">
-            <h1 className="text-2xl font-bold mb-4">Settings</h1>
-            <p className="text-gray-400">Settings panel coming soon...</p>
-          </div>
-        );
+  return <SettingsPage />;
       default:
         return <Dashboard />;
     }
