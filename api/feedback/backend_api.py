@@ -7,8 +7,7 @@ import numpy as np
 import stripe
 import razorpay
 
-
-from fastapi import FastAPI, HTTPException, Request, Query ,Body
+from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse, StreamingResponse
@@ -40,18 +39,11 @@ FEEDBACK_FILE = (
 )
 ALERTS_FILE = os.path.join(DATA_DIR, "alerts.csv")
 
-# -------------------- Stripe Payments --------------------
+# -------------------- Stripe & Razorpay Setup --------------------
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "")
-STRIPE_PRICE_ID = os.getenv("STRIPE_PRICE_ID", "")
-STRIPE_CURRENCY = os.getenv("STRIPE_CURRENCY", "usd")
-STRIPE_AMOUNT_CENTS = int(os.getenv("STRIPE_AMOUNT_CENTS", "499"))
-PUBLIC_DOMAIN = "https://awakenu-1.netlify.app/"
-
-# -------------------- Razorpay Payments --------------------
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "")
 RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "")
 razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
-
 
 # -------------------- Utility Functions --------------------
 def load_and_normalize_df(path: str) -> pd.DataFrame:
@@ -66,10 +58,13 @@ def load_and_normalize_df(path: str) -> pd.DataFrame:
 
 def sanitize_value(v):
     if isinstance(v, (np.generic,)):
-        try: v = v.item()
-        except Exception: v = None
+        try:
+            v = v.item()
+        except Exception:
+            v = None
     if isinstance(v, float):
-        if np.isnan(v) or np.isinf(v): return None
+        if np.isnan(v) or np.isinf(v):
+            return None
         return round(v, 3)
     if isinstance(v, (list, tuple)):
         return [sanitize_value(x) for x in v]
@@ -80,17 +75,12 @@ def sanitize_value(v):
 def sanitize_record(rec: dict) -> dict:
     return {k: sanitize_value(v) for k, v in rec.items()}
 
-# -------------------- Global Error Handler --------------------
-@app.exception_handler(Exception)
-async def global_exception_handler(request: Request, exc: Exception):
-    logger.exception("Unhandled error in request %s %s", request.method, request.url)
-    return JSONResponse({"detail": "Internal server error"}, status_code=500)
-
-# -------------------- API Routes --------------------
+# -------------------- Health --------------------
 @app.get("/health")
 def health():
     return {"status": "Backend is running"}
 
+# -------------------- Summary --------------------
 @app.get("/api/summary")
 def get_summary():
     if not os.path.exists(FEEDBACK_FILE):
@@ -144,6 +134,7 @@ def get_summary():
         "trends": trends,
     })
 
+# -------------------- Feedback --------------------
 @app.get("/api/feedback")
 def get_feedback(limit: int = 200):
     if not os.path.exists(FEEDBACK_FILE): return []
@@ -154,37 +145,25 @@ def get_feedback(limit: int = 200):
     records = df.head(limit).to_dict(orient="records")
     return jsonable_encoder([sanitize_record(r) for r in records])
 
+# -------------------- Alerts --------------------
 @app.get("/api/alerts")
 def get_alerts(
-    request: Request,
     urgency: str = Query("", alias="urgency"),
     feedback_type: str = Query("", alias="feedback_type")
 ):
     try:
-        urgency_filter = urgency.strip().lower()
-        type_filter = feedback_type.strip().lower()
-        csv_path = os.path.join(DATA_DIR, "feedback_enriched.csv")
-        if not os.path.exists(csv_path):
-            raise HTTPException(status_code=404, detail="feedback_enriched.csv not found")
-
-        df = pd.read_csv(csv_path)
-        if "urgency" in df.columns:
-            df["urgency"] = df["urgency"].astype(str).str.strip().str.lower()
-        if "feedback_type" in df.columns:
-            df["feedback_type"] = df["feedback_type"].astype(str).str.strip().str.lower()
-
-        if urgency_filter and urgency_filter != "all urgencies":
-            df = df[df["urgency"].str.contains(urgency_filter, na=False)]
-        if type_filter and type_filter != "all feedback types":
-            df = df[df["feedback_type"].str.contains(type_filter, na=False)]
-
+        df = load_and_normalize_df(FEEDBACK_FILE)
+        if urgency and urgency != "all urgencies":
+            df = df[df["urgency"].str.contains(urgency.lower(), na=False)]
+        if feedback_type and feedback_type != "all feedback types":
+            df = df[df["feedback_type"].str.contains(feedback_type.lower(), na=False)]
         alerts_data = df.rename(columns={"cleaned_body": "details", "action_recommended": "action"}).to_dict(orient="records")
         return JSONResponse(content=jsonable_encoder([sanitize_record(r) for r in alerts_data]))
     except Exception as e:
         logger.exception("Error in get_alerts")
         raise HTTPException(status_code=500, detail=str(e))
 
-# -------------------- Stripe Checkout --------------------
+# -------------------- Razorpay --------------------
 @app.post("/api/payment_gateway/create-order")
 async def create_razorpay_order(request: Request):
     try:
@@ -192,8 +171,7 @@ async def create_razorpay_order(request: Request):
         amount_rupees = body.get("amount", 299)
         selected_plan = body.get("selectedPlanId", "pro")
 
-        amount_paise = int(amount_rupees * 100)  # Convert rupees to paise
-
+        amount_paise = int(amount_rupees * 100)
         plan_descriptions = {
             "basic": "Export up to 1,000 records",
             "pro": "Export up to 10,000 records",
@@ -204,17 +182,9 @@ async def create_razorpay_order(request: Request):
             "amount": amount_paise,
             "currency": "INR",
             "payment_capture": 1,
-            "notes": {
-                "plan": selected_plan,
-                "description": plan_descriptions.get(selected_plan, "Pro Export Plan")
-            }
+            "notes": {"plan": selected_plan, "description": plan_descriptions.get(selected_plan, "Pro Export Plan")}
         })
-
-        return JSONResponse({
-            "id": order["id"],
-            "amount": order["amount"],
-            "currency": order["currency"]
-        })
+        return JSONResponse(order)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -231,28 +201,58 @@ async def verify_payment(request: Request):
     except Exception as e:
         return {"status": "failed", "error": str(e)}
 
+# -------------------- Reviews Insights --------------------
+@app.get("/api/reviews/insights")
+def get_product_insights():
+    """Return customer stories and products needing attention from feedback data."""
+    try:
+        df = load_and_normalize_df(FEEDBACK_FILE)
+        customer_stories, products_needing_attention = [], []
 
+        if "product" in df.columns and "sentiment" in df.columns:
+            for i, row in df.head(20).iterrows():
+                sentiment_score = int(row.get("sentiment_score", np.random.uniform(60, 95)) * 100) if "sentiment_score" in row else np.random.randint(60, 95)
+                sentiment_type = row.get("sentiment", "positive")
+                customer_stories.append({
+                    "id": int(i),
+                    "name": row.get("username", f"User{i}"),
+                    "initials": str(row.get("username", "U"))[0].upper(),
+                    "product": row.get("product", "Unknown Product"),
+                    "review": row.get("cleaned_body", "No review text available."),
+                    "rating": int(row.get("rating", np.random.randint(3, 5))),
+                    "sentiment": sentiment_score,
+                    "sentimentType": sentiment_type
+                })
 
+        if "sentiment_score" in df.columns and "product" in df.columns:
+            low_sent = df[df["sentiment_score"] < 0.5]
+            for i, row in low_sent.iterrows():
+                products_needing_attention.append({
+                    "id": int(i),
+                    "name": row.get("product", "Unknown Product"),
+                    "issue": row.get("feedback_type", "Negative feedback trend"),
+                    "priority": "HIGH" if row["sentiment_score"] < 0.25 else "MEDIUM",
+                    "sentiment": int(row["sentiment_score"] * 100),
+                    "reviews": np.random.randint(50, 500)
+                })
+
+        return {
+            "customerStories": customer_stories,
+            "productsNeedingAttention": products_needing_attention
+        }
+    except Exception as e:
+        logger.exception("Error generating product insights")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# -------------------- Export --------------------
 @app.get("/api/export")
 def export_csv():
     if not os.path.exists(FEEDBACK_FILE):
         raise HTTPException(status_code=404, detail="No data to export")
-
     df = load_and_normalize_df(FEEDBACK_FILE)
     buffer = io.StringIO()
-    writer = csv.writer(buffer)
-    writer.writerow(df.columns.tolist())
-    for _, row in df.iterrows():
-        writer.writerow([row.get(col, None) for col in df.columns])
+    df.to_csv(buffer, index=False)
     buffer.seek(0)
-
-    return StreamingResponse(
-        iter([buffer.getvalue()]),
-        media_type="text/csv",
-        headers={"Content-Disposition": "attachment; filename=export.csv"},
-    )
-
-
     return StreamingResponse(
         iter([buffer.getvalue()]),
         media_type="text/csv",
@@ -262,6 +262,6 @@ def export_csv():
 # -------------------- Serve Frontend --------------------
 if os.path.isdir(FRONTEND_DIR) and os.path.isfile(os.path.join(FRONTEND_DIR, 'index.html')):
     app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
-    print(f"Serving frontend from: {FRONTEND_DIR}")
+    print(f"✅ Serving frontend from: {FRONTEND_DIR}")
 else:
-    print(f"Frontend build not found at: {FRONTEND_DIR}")
+    print(f"⚠️ Frontend build not found at: {FRONTEND_DIR}")
