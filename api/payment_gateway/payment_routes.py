@@ -9,8 +9,8 @@ import hashlib
 payment_bp = Blueprint('payment', __name__)
 
 # Initialize Razorpay Client (ensure these are loaded from environment variables)
-RAZORPAY_KEY_ID = os.environ.get('rzp_live_Ra0CUx8zTAO5n3')
-RAZORPAY_KEY_SECRET = os.environ.get('YSfs9g24Tk7PYqiwa5Z2cG8I')
+RAZORPAY_KEY_ID = os.environ.get('rRAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET')
 
 if not RAZORPAY_KEY_ID or not RAZORPAY_KEY_SECRET:
     raise ValueError("RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET must be set as environment variables.")
