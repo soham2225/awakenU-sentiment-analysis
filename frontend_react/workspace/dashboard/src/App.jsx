@@ -5,7 +5,8 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import FeedbackExplorer from './components/FeedbackExplorer';
-import AlertsPage from './components/alerts'; // ✅ import your modern page here
+import AlertsPage from './components/alerts';
+import ProductReviewInsights from './components/products'; // ✅ import real product component
 
 const AppContent = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -37,14 +38,9 @@ const AppContent = () => {
           </div>
         );
       case 'products':
-        return (
-          <div className="text-white">
-            <h1 className="text-2xl font-bold mb-4">Products</h1>
-            <p className="text-gray-400">Product management coming soon...</p>
-          </div>
-        );
+        return <ProductReviewInsights />; // ✅ now loads the live products page
       case 'alerts':
-        return <AlertsPage />; // ✅ replaced old placeholder
+        return <AlertsPage />;
       case 'settings':
         return (
           <div className="text-white">
