@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "../ui/card";
+
+import { Badge } from "../ui/badge";
 import { Star, TrendingUp, AlertTriangle, Clock } from "lucide-react";
 
 export default function ProductReviewInsights() {
