@@ -5,6 +5,8 @@ import logging
 import pandas as pd
 import numpy as np
 import stripe
+import razorpay
+
 
 from fastapi import FastAPI, HTTPException, Request, Query ,Body
 from fastapi.middleware.cors import CORSMiddleware
@@ -44,6 +46,12 @@ STRIPE_PRICE_ID = os.getenv("STRIPE_PRICE_ID", "")
 STRIPE_CURRENCY = os.getenv("STRIPE_CURRENCY", "usd")
 STRIPE_AMOUNT_CENTS = int(os.getenv("STRIPE_AMOUNT_CENTS", "499"))
 PUBLIC_DOMAIN = "https://awakenu-1.netlify.app/"
+
+# -------------------- Razorpay Payments --------------------
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "")
+razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+
 
 # -------------------- Utility Functions --------------------
 def load_and_normalize_df(path: str) -> pd.DataFrame:
@@ -177,49 +185,56 @@ def get_alerts(
         raise HTTPException(status_code=500, detail=str(e))
 
 # -------------------- Stripe Checkout --------------------
-@app.post("/api/checkout")
-async def create_checkout_session(request: Request, body: dict = Body(...)):
+@app.post("/api/payment_gateway/create-order")
+async def create_razorpay_order(request: Request):
     try:
-        plan = body.get("plan", "pro")
-        amount_rupees = body.get("amount_rupees", 299)
-        amount_paise = int(amount_rupees * 100)  # Razorpay works in paise
+        body = await request.json()
+        amount_rupees = body.get("amount", 299)
+        selected_plan = body.get("selectedPlanId", "pro")
 
-        plan_configs = {
-            "basic": {"name": "Basic Export Plan", "description": "Export up to 1,000 records"},
-            "pro": {"name": "Pro Export Plan", "description": "Export up to 10,000 records"},
-            "enterprise": {"name": "Enterprise Plan", "description": "Unlimited exports"},
+        amount_paise = int(amount_rupees * 100)  # Convert rupees to paise
+
+        plan_descriptions = {
+            "basic": "Export up to 1,000 records",
+            "pro": "Export up to 10,000 records",
+            "enterprise": "Unlimited exports"
         }
-
-        plan_config = plan_configs.get(plan, plan_configs["pro"])
 
         order = razorpay_client.order.create({
             "amount": amount_paise,
             "currency": "INR",
             "payment_capture": 1,
-            "notes": {"plan": plan, "description": plan_config["description"]}
+            "notes": {
+                "plan": selected_plan,
+                "description": plan_descriptions.get(selected_plan, "Pro Export Plan")
+            }
         })
 
-        return {"order_id": order["id"], "amount": amount_paise, "currency": "INR"}
+        return JSONResponse({
+            "id": order["id"],
+            "amount": order["amount"],
+            "currency": order["currency"]
+        })
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/payment_gateway/verify-payment")
+async def verify_payment(request: Request):
+    try:
+        body = await request.json()
+        razorpay_client.utility.verify_payment_signature({
+            "razorpay_order_id": body["razorpay_order_id"],
+            "razorpay_payment_id": body["razorpay_payment_id"],
+            "razorpay_signature": body["razorpay_signature"],
+        })
+        return {"status": "success"}
+    except Exception as e:
+        return {"status": "failed", "error": str(e)}
 
 
 
 @app.get("/api/export")
-def export_csv(session_id: str):
-    if not stripe.api_key:
-        raise HTTPException(status_code=500, detail="Stripe is not configured")
-    if not session_id:
-        raise HTTPException(status_code=400, detail="session_id is required")
-
-    try:
-        session = stripe.checkout.Session.retrieve(session_id)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid session")
-
-    if session.get("payment_status") != "paid":
-        raise HTTPException(status_code=402, detail="Payment required")
-
+def export_csv():
     if not os.path.exists(FEEDBACK_FILE):
         raise HTTPException(status_code=404, detail="No data to export")
 
@@ -230,6 +245,13 @@ def export_csv(session_id: str):
     for _, row in df.iterrows():
         writer.writerow([row.get(col, None) for col in df.columns])
     buffer.seek(0)
+
+    return StreamingResponse(
+        iter([buffer.getvalue()]),
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=export.csv"},
+    )
+
 
     return StreamingResponse(
         iter([buffer.getvalue()]),
