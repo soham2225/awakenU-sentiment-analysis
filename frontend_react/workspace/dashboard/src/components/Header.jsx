@@ -17,7 +17,7 @@ const Header = () => {
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">Sentily</h1>
+              <h1 className="text-xl font-bold text-white">AwakenU</h1>
               <p className="text-xs text-gray-400">Hybrid Sentiment Analysis Dashboard</p>
             </div>
           </div>
