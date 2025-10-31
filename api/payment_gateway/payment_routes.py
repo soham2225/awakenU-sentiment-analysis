@@ -9,7 +9,7 @@ import hashlib
 payment_bp = Blueprint('payment', __name__)
 
 # Initialize Razorpay Client (ensure these are loaded from environment variables)
-RAZORPAY_KEY_ID = os.environ.get('rRAZORPAY_KEY_ID')
+RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID')
 RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET')
 
 if not RAZORPAY_KEY_ID or not RAZORPAY_KEY_SECRET:
@@ -56,8 +56,13 @@ def create_order():
         return jsonify(order), 200
 
     except Exception as e:
-        print(f"Error creating Razorpay order: {e}")
-        return jsonify({'message': f'Failed to create order: {str(e)}'}), 500
+     import traceback
+    print("---------- RAZORPAY ORDER CREATION ERROR ----------")
+    print(traceback.format_exc())
+    print(f"Error details: {str(e)}")
+    print("--------------------------------------------------")
+    return jsonify({'message': f'Failed to create order: {str(e)}'}), 500
+
 
 
 @payment_bp.route('/verify-payment', methods=['POST'])
