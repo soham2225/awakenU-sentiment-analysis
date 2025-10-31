@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import FeedbackExplorer from './components/FeedbackExplorer';
+import AlertsPage from './components/alerts'; // ✅ import your modern page here
 
 const AppContent = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -43,12 +44,7 @@ const AppContent = () => {
           </div>
         );
       case 'alerts':
-        return (
-          <div className="text-white">
-            <h1 className="text-2xl font-bold mb-4">Alerts</h1>
-            <p className="text-gray-400">Alert management coming soon...</p>
-          </div>
-        );
+        return <AlertsPage />; // ✅ replaced old placeholder
       case 'settings':
         return (
           <div className="text-white">
