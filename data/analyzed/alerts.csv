@@ -81,3 +81,10 @@ strong_negative,,email,Samruddhi Gangurde <samruddhigangurde0708@gmail.com>,mobi
 strong_negative,,email,Zingoy <noreply@zingoy.com>,product_y,negative,0.849,high,neutral,review,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361
 strong_negative,,email,Alison Learning <noreply@us-learning.alison.com>,unknown,negative,0.867,medium,neutral,review,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361
 strong_negative,,email,Job Guarantee Course | Cuvette Tech <team@cuvette.tech>,checkout,negative,0.988,high,neutral,review,Negative sentiment with high confidence.,2025-08-28T13:08:29.970361
+high_urgency_complaint,,email,Generative AI via LinkedIn <newsletters-noreply@linkedin.com>,product_y,positive,0.9,high,complaint,escalate,"High urgency complaint, escalate immediately.",2025-11-01T01:03:49.333396
+high_urgency_complaint,,email,Generative AI via LinkedIn <newsletters-noreply@linkedin.com>,unknown,negative,0.994,high,complaint,escalate,"High urgency complaint, escalate immediately.",2025-11-01T01:03:49.333396
+high_urgency_complaint,,email,Groww Trading Bulletin <noreply@groww.in>,mobile_app,negative,0.993,high,complaint,escalate,"High urgency complaint, escalate immediately.",2025-11-01T01:03:49.333396
+strong_negative,,email,Samruddhi Gangurde <samruddhigangurde0708@gmail.com>,mobile_app,negative,1.0,medium,suggestion,log for roadmap,Negative sentiment with high confidence.,2025-11-01T01:03:49.333396
+strong_negative,,email,Zingoy <noreply@zingoy.com>,product_y,negative,0.849,high,neutral,review,Negative sentiment with high confidence.,2025-11-01T01:03:49.333396
+strong_negative,,email,Alison Learning <noreply@us-learning.alison.com>,unknown,negative,0.867,medium,neutral,review,Negative sentiment with high confidence.,2025-11-01T01:03:49.333396
+strong_negative,,email,Job Guarantee Course | Cuvette Tech <team@cuvette.tech>,checkout,negative,0.988,high,neutral,review,Negative sentiment with high confidence.,2025-11-01T01:03:49.333396
